@@ -28,7 +28,7 @@ router.get("/file", (req, res) => {
 });
 
 router.get("/config", (req, res) => {
-  const baseUrl = ` https://5d344b50d7a0.ngrok-free.app`;
+  const baseUrl = `https://only-office-poc-production.up.railway.app`;
 
   const config = {
     document: {
