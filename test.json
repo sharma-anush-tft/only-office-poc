@@ -1,0 +1,17 @@
+{
+  "document": {
+    "fileType": "docx",
+    "title": "Sample Document.docx",
+    "url": "https:///5d344b50d7a0.ngrok-free.app/api/v1/onlyoffice/file",
+    "key": "Khirz6zTPdfd7"
+  },
+  "documentType": "word",
+  "editorConfig": {
+    "mode": "edit",
+    "callbackUrl": "https://webhook.site/1beaea7d-c984-439c-89e4-fc2f8230e53e",
+    "user": {
+      "id": "u1",
+      "name": "Anush Sharma"
+    }
+  }
+}
