@@ -53,6 +53,7 @@ router.get("/config", (req, res) => {
       },
       customization: {
         forcesave: true,
+        uiTheme: 'theme-dark',
         plugins: false
       },
     },
