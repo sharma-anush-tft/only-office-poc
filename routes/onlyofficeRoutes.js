@@ -44,9 +44,7 @@ router.get("/config", (req, res) => {
 
     editorConfig: {
       mode: "edit",
-      uiTheme: "default-dark",
       callbackUrl: `${baseUrl}/api/v1/onlyoffice/callback`,
-
       user: {
         id: "1000",
         name: "Anush Sharma",
