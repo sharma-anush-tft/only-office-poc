@@ -53,6 +53,10 @@ router.get("/config", (req, res) => {
         forcesave: true,
         uiTheme: "default-dark",
         plugins: false,
+        font: {
+          name: 'Poppins',
+          size: 11
+        }
       },
     },
   };
