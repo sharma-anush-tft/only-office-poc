@@ -5,7 +5,7 @@ const fs = require("fs");
 const axios = require("axios");
 const router = express.Router();
 
-const ONLYOFFICE_SECRET = "9e66d41e1333444789240e8b61fc12a1";
+const ONLYOFFICE_SECRET = "DzEH8aPJOiHienDN4OQo1ABd0dg2bQ9T";
 
 router.get("/file", (req, res) => {
   try {
