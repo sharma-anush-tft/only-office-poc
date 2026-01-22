@@ -7,10 +7,14 @@ const router = express.Router();
 
 const ONLYOFFICE_SECRET = "DzEH8aPJOiHienDN4OQo1ABd0dg2bQ9T";
 
-router.get("/file", (req, res) => {
+router.get("/file", async (req, res) => {
   try {
     const filePath = path.join(__dirname, "../assets/demo-cim.docx");
-
+    let url = 'https://storage.googleapis.com/public_images_legacy/3f7dda45-21d0-43df-b756-3b1b358f6db0.docx'
+const response = await axios.get(url, {
+      responseType: "stream",
+    });
+    
     res.setHeader(
       "Content-Type",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -20,8 +24,7 @@ router.get("/file", (req, res) => {
       'attachment; filename="demo-cim.docx"'
     );
 
-    // let url = 'https://storage.googleapis.com/public_images_legacy/3f7dda45-21d0-43df-b756-3b1b358f6db0.docx'
-    res.sendFile(filePath);
+    res.sendFile(res);
   } catch (error) {
     console.error("LOCAL FILE ERROR:", error);
     res.status(500).json({ error: "File not found" });
