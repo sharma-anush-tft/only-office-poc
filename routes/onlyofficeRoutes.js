@@ -35,7 +35,7 @@ router.get("/file", async (req, res) => {
 router.get("/file1", async (req, res) => {
   try {
     const url =
-      "https://storage.googleapis.com/public_images_legacy/3f7dda45-21d0-43df-b756-3b1b358f6db0.docx";
+      "https://boosstblobstorage.blob.core.windows.net/application-public-files/4eef1ff7-7d69-46cc-9e7f-f77eef8dca96.docx";
 
     const response = await axios.get(url, {
       responseType: "stream",
