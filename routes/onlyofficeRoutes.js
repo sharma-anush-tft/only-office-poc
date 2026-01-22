@@ -44,7 +44,8 @@ router.get("/config", (req, res) => {
 
     editorConfig: {
       mode: "edit",
-      callbackUrl: `${baseUrl}/api/v1/onlyoffice/callback`,
+      // callbackUrl: `${baseUrl}/api/v1/onlyoffice/callback`,
+      callbackUrl: `https://boosst-apim.azure-api.net/test/api/onlyoffice/callback/c0c80518-df6c-4775-9b84-aacc60a383ae?subscription-key=0ffea418a5d24b1d956419d812eda5e4`,
       user: {
         id: "1000",
         name: "Anush Sharma",
