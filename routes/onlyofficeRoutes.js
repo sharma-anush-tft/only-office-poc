@@ -42,14 +42,14 @@ router.get("/file1", async (req, res) => {
       timeout: 15000,
     });
 
-    // res.setHeader(
-    //   "Content-Type",
-    //   "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    // );
-    // res.setHeader(
-    //   "Content-Disposition",
-    //   'attachment; filename="demo-cim.docx"'
-    // );
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="demo-cim.docx"'
+    );
 
     response.data.pipe(res); 
   } catch (error) {
