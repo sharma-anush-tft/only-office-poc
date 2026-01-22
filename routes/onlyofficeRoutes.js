@@ -25,12 +25,42 @@ router.get("/file", async (req, res) => {
       'attachment; filename="demo-cim.docx"',
     );
 
-    res.sendFile(response);
+    response.sendFile(res);
   } catch (error) {
     console.error("LOCAL FILE ERROR:", error);
     res.status(500).json({ error: "File not found" });
   }
 });
+
+router.get("/file1", async (req, res) => {
+  try {
+    const url =
+      "https://storage.googleapis.com/public_images_legacy/3f7dda45-21d0-43df-b756-3b1b358f6db0.docx";
+
+    const response = await axios.get(url, {
+      responseType: "stream",
+      timeout: 15000,
+    });
+
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    );
+    res.setHeader(
+      "Content-Disposition",
+      'attachment; filename="demo-cim.docx"'
+    );
+
+    response.data.pipe(res); // 🔥 THIS is the key line
+  } catch (error) {
+    console.error("REMOTE FILE ERROR:", error.message);
+    res.status(500).json({
+      error: "Failed to fetch remote file",
+      details: error.message,
+    });
+  }
+});
+
 
 router.get("/config", (req, res) => {
   const baseUrl = `https://only-office-poc-production.up.railway.app`;
