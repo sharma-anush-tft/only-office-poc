@@ -37,8 +37,8 @@ router.get("/config", (req, res) => {
 
       // url: `${baseUrl}/api/v1/onlyoffice/file`,
       url: `https://boosstblobstorage.blob.core.windows.net/application-public-files/4eef1ff7-7d69-46cc-9e7f-f77eef8dca96.docx`,
-      // key: "doc-" + Date.now(),
-      key: 'doc-c0c80518-df6c-4775-9b84-aacc60a383ae-8b5d7140-0790-4e27-9512-f8cb0edde06a'
+      key: "doc-" + Date.now(),
+      // key: 'doc-c0c80518-df6c-4775-9b84-aacc60a383ae-8b5d7140-0790-4e27-9512-f8cb0edde06a'
     },
 
     documentType: "word",
