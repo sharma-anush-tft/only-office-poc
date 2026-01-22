@@ -35,9 +35,8 @@ router.get("/config", (req, res) => {
       fileType: "docx",
       title: "demo-cim.docx",
 
-      url: `${baseUrl}/api/v1/onlyoffice/file`,
-      // url: `https://boosstblobstorage.blob.core.windows.net/onlyofficedocx/4eef1ff7-7d69-46cc-9e7f-f77eef8dca96.docx?sv=2025-11-05&se=2026-01-22T11%3A49%3A08Z&sr=b&sp=r&sig=anmwWzQgdqphXLy9VGyCm%2FJZNmleWjbw5QYdRk5%2Fs14%3D`,
-
+      // url: `${baseUrl}/api/v1/onlyoffice/file`,
+      url: `https://boosstblobstorage.blob.core.windows.net/application-public-files/4eef1ff7-7d69-46cc-9e7f-f77eef8dca96.docx`,
       // key: "doc-" + Date.now(),
       key: 'doc-c0c80518-df6c-4775-9b84-aacc60a383ae-8b5d7140-0790-4e27-9512-f8cb0edde06a'
     },
