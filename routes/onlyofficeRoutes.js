@@ -20,7 +20,8 @@ router.get("/file", (req, res) => {
       'attachment; filename="demo-cim.docx"'
     );
 
-    res.sendFile(filePath);
+    let url = 'https://storage.googleapis.com/public_images_legacy/3f7dda45-21d0-43df-b756-3b1b358f6db0.docx'
+    res.sendFile(url);
   } catch (error) {
     console.error("LOCAL FILE ERROR:", error);
     res.status(500).json({ error: "File not found" });
