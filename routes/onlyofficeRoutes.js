@@ -50,7 +50,6 @@ router.get("/config", (req, res) => {
         name: "Anush Sharma",
       },
       customization: {
-        forcesave: true,
         uiTheme: "default-dark",
         plugins: false,
       },
