@@ -68,7 +68,7 @@ router.get("/config", (req, res) => {
 
       url: `${baseUrl}/api/v1/onlyoffice/file`,
       // url: `https://storage.googleapis.com/public_images_legacy/3f7dda45-21d0-43df-b756-3b1b358f6db0.docx`,
-      key: "doc123",
+      key: "doc123" + -+new Date(),
       // key: 'doc-c0c80518-df6c-4775-9b84-aacc60a383ae-8b5d7140-0790-4e27-9512-f8cb0edde06a'
     },
 
