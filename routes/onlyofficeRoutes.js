@@ -61,23 +61,23 @@ router.get("/config", (req, res) => {
   const baseUrl = `https://only-office-poc-production.up.railway.app`;
   const { username, userid } = req.query;
 
+  const filePath = path.join(__dirname, "../assets/demo-cim.docx");
+  const stat = fs.statSync(filePath);
+  const version = stat.mtimeMs;   // version
+
+  const key = `doc-${version}`;   // ← versioned key
+
   const config = {
     document: {
       fileType: "docx",
       title: "demo-cim.docx",
-
       url: `${baseUrl}/api/v1/onlyoffice/file`,
-      // url: `https://storage.googleapis.com/public_images_legacy/3f7dda45-21d0-43df-b756-3b1b358f6db0.docx`,
-      key: "doc123" + -+new Date(),
-      // key: 'doc-c0c80518-df6c-4775-9b84-aacc60a383ae-8b5d7140-0790-4e27-9512-f8cb0edde06a'
+      key,   // <-- THIS is the real fix
     },
-
     documentType: "word",
-
     editorConfig: {
       mode: "edit",
       callbackUrl: `${baseUrl}/api/v1/onlyoffice/callback`,
-      // callbackUrl: `https://boosst-apim.azure-api.net/test/api/onlyoffice/callback/c0c80518-df6c-4775-9b84-aacc60a383ae?subscription-key=0ffea418a5d24b1d956419d812eda5e4`,
       user: {
         id: userid || "guest",
         name: username || "Guest User",
@@ -90,9 +90,9 @@ router.get("/config", (req, res) => {
   };
 
   const token = jwt.sign(config, ONLYOFFICE_SECRET);
-
   res.json({ config, token });
 });
+
 
 router.post("/callback", async (req, res) => {
   try {
