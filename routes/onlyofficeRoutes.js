@@ -72,7 +72,7 @@ router.get("/config", (req, res) => {
       fileType: "docx",
       title: "demo-cim.docx",
       url: `${baseUrl}/api/v1/onlyoffice/file`,
-      key,   // <-- THIS is the real fix
+      key,   
     },
     documentType: "word",
     editorConfig: {
@@ -85,6 +85,7 @@ router.get("/config", (req, res) => {
       customization: {
         uiTheme: "default-dark",
         plugins: false,
+        forcesave: true
       },
     },
   };
