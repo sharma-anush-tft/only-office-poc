@@ -25,7 +25,7 @@ router.get("/file", async (req, res) => {
       'attachment; filename="demo-cim.docx"',
     );
 
-    response.sendFile(res);
+    res.sendFile(filePath);
   } catch (error) {
     console.error("LOCAL FILE ERROR:", error);
     res.status(500).json({ error: "File not found" });
