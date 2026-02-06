@@ -28,7 +28,8 @@ router.get("/file", (req, res) => {
 });
 
 router.get("/config", (req, res) => {
-  const baseUrl = `https://only-office-poc-production.up.railway.app`;
+  // const baseUrl = `https://only-office-poc-production.up.railway.app`;
+  const baseUrl = `https://only-office-poc.onrender.com`;
 
   const config = {
     document: {
@@ -52,7 +53,7 @@ router.get("/config", (req, res) => {
       customization: {
         forcesave: true,
         uiTheme: "default-dark",
-        plugins: false,
+        // plugins: false,
         font: {
           name: 'Poppins',
           size: 11
