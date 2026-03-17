@@ -1,3 +1,5 @@
+// ======== START: ONLYOFFICE PPT BACKEND (FULL CODE) ========
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const path = require("path");
@@ -7,17 +9,20 @@ const router = express.Router();
 
 const ONLYOFFICE_SECRET = "DzEH8aPJOiHienDN4OQo1ABd0dg2bQ9T";
 
+// =====================
+// 📁 SERVE LOCAL PPT FILE
+// =====================
 router.get("/file", (req, res) => {
   try {
-    const filePath = path.join(__dirname, "../assets/demo-cim.docx");
+    const filePath = path.join(__dirname, "../assets/demo-cim.pptx");
 
     res.setHeader(
       "Content-Type",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     );
     res.setHeader(
       "Content-Disposition",
-      'attachment; filename="demo-cim.docx"',
+      'attachment; filename="demo-cim.pptx"'
     );
 
     res.sendFile(filePath);
@@ -27,10 +32,14 @@ router.get("/file", (req, res) => {
   }
 });
 
+// =====================
+// 🌐 SERVE REMOTE PPT FILE (OPTIONAL)
+// =====================
 router.get("/file1", async (req, res) => {
   try {
     const url =
-      "https://boosst-apim.azure-api.net/test/api/onlyoffice/file?subscription-key=0ffea418a5d24b1d956419d812eda5e4&fileLink=https%3A%2F%2Fboosstblobstorage.blob.core.windows.net%2Fonlyofficedocx%2Fc4620784-4241-4925-abf0-9c6a6a4b8ba3.docx%3Fsv%3D2025-11-05%26spr%3Dhttps%26se%3D2026-02-02T14%253A27%253A39Z%26sr%3Db%26sp%3Drl%26sig%3DjFsy%252BeFOp1QEN6aaf7evxZSWAHTTTI7HM0hBSc5ws%252Fg%253D";
+      "https://boosstblobstorage.blob.core.windows.net/cimpptx/a9740db8-7dd8-41d7-8156-26fd7964a500.pptx?sv=2025-11-05&se=2026-03-17T10%3A53%3A13Z&sr=b&sp=r&sig=oETBy496afG4%2BXoo7IwYdh5Zg5xwkGLvXQajxK6FmL0%3D";
+
     const response = await axios.get(url, {
       responseType: "stream",
       timeout: 15000,
@@ -38,11 +47,11 @@ router.get("/file1", async (req, res) => {
 
     res.setHeader(
       "Content-Type",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     );
     res.setHeader(
       "Content-Disposition",
-      'attachment; filename="demo-cim.docx"',
+      'attachment; filename="demo-cim.pptx"'
     );
 
     response.data.pipe(res);
@@ -55,21 +64,23 @@ router.get("/file1", async (req, res) => {
   }
 });
 
+// =====================
+// ⚙️ ONLYOFFICE CONFIG (PPT EDITOR)
+// =====================
 router.get("/config", (req, res) => {
-  // const baseUrl = `https://only-office-poc-production.up.railway.app`;
-  const baseUrl = 'https://only-office-poc.onrender.com'
+  const baseUrl = "https://only-office-poc.onrender.com";
   const { username, userid } = req.query;
 
-  const filePath = path.join(__dirname, "../assets/demo-cim.docx");
+  const filePath = path.join(__dirname, "../assets/demo-cim.pptx");
   const stat = fs.statSync(filePath);
   const version = stat.mtimeMs;
 
-  const key = `doc-${version}`;
+  const key = `ppt-${version}`;
 
   const config = {
     document: {
-      fileType: "docx",
-      title: "demo-cim.docx",
+      fileType: "pptx", // 🔥 IMPORTANT
+      title: "demo-cim.pptx",
       url: `${baseUrl}/api/v1/onlyoffice/file`,
       key,
       permissions: {
@@ -77,21 +88,25 @@ router.get("/config", (req, res) => {
         download: true,
       },
     },
-    documentType: "word",
+
+    documentType: "slide", // 🔥 IMPORTANT
+
     editorConfig: {
       mode: "edit",
+
       callbackUrl: `${baseUrl}/api/v1/onlyoffice/callback`,
+
       events: {
         onDocumentReady: "onOnlyOfficeReady",
       },
+
       user: {
         id: userid || "guest",
         name: username || "Guest User",
       },
+
       customization: {
         uiTheme: "default-dark",
-        // plugins: false,
-        forcesave: true,
       },
     },
   };
@@ -100,29 +115,34 @@ router.get("/config", (req, res) => {
   res.json({ config, token });
 });
 
+// =====================
+// 💾 SAVE CALLBACK (PPT)
+// =====================
 router.post("/callback", async (req, res) => {
   try {
     const body = req.body;
     console.log("ONLYOFFICE CALLBACK CALLED", body);
-    // if (body.status === 2 && body.url) {
+
     if ((body.status === 2 || body.status === 6) && body.url) {
-      console.log("Saving document from onluyoffice:");
+      console.log("Saving PPT from ONLYOFFICE...");
 
       const response = await axios.get(body.url, {
         responseType: "arraybuffer",
       });
 
-      const filePath = path.join(__dirname, "../assets/demo-cim.docx");
+      const filePath = path.join(__dirname, "../assets/demo-cim.pptx");
       fs.writeFileSync(filePath, response.data);
-      console.log("Document saved successfully:", filePath);
+
+      console.log("PPT saved successfully:", filePath);
     }
 
     res.json({ error: 0 });
   } catch (err) {
     console.error("SAVE FAILED:", err);
-
     res.json({ error: 1 });
   }
 });
 
 module.exports = router;
+
+// ======== END: ONLYOFFICE PPT BACKEND (FULL CODE) ========
