@@ -7,7 +7,7 @@ const fs = require("fs");
 const axios = require("axios");
 const router = express.Router();
 
-const ONLYOFFICE_SECRET = "DzEH8aPJOiHienDN4OQo1ABd0dg2bQ9T";
+const ONLYOFFICE_SECRET = "fd7d9c01aa744667af41dff66b438fb9";
 
 // =====================
 // 📁 SERVE LOCAL PPT FILE
